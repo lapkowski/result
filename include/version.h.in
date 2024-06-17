@@ -1,0 +1,7 @@
+#define RESULT_VERSION      "@VERSION@"
+
+#define RESULT_REVISION     @REVISION@
+
+#define RESULT_MAJOR        @MAJOR@
+#define RESULT_MINOR        @MINOR@
+#define RESULT_PATCH        @PATCH@
