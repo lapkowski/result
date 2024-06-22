@@ -12,16 +12,14 @@ conf_data.set('MAJOR', major)
 conf_data.set('MINOR', minor)
 conf_data.set('PATCH', patch)
 
-configure_file(input: 'include/version.h.in', output: 'version.h', configuration: conf_data)
-vcs_tag(input: 'include/vcs_version.h.in', output: 'vcs_version.h')
+version_file = configure_file(input: 'include/version.h.in', output: 'version.h', configuration: conf_data)
 
 install_headers(
   [
     'include/result.h',
     'include/error.h',
     'include/panic.h',
-    meson.current_build_dir() + '/version.h',
-    meson.current_build_dir() + '/vcs_version.h'
+    version_file
   ],
   subdir: 'result'
 )
