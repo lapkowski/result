@@ -34,5 +34,5 @@ install_headers(
 
 install_man('man/result.3')
 
-install_data(['CHANGELOG.md', 'LICENSE', 'README.md', 'ROADMAP.md'], install_dir: get_option('datadir') / 'result')
-install_data('docs/docs.md', install_dir: get_option('datadir') / 'result/documentation')
+install_data(['CHANGELOG.md', 'LICENSE', 'README.md', 'ROADMAP.md'], install_dir: get_option('datadir') / 'doc')
+install_data('docs/docs.md', install_dir: get_option('datadir') / 'doc/result')
