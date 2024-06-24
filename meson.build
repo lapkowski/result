@@ -32,6 +32,20 @@ install_headers(
   subdir: 'result/ports'
 )
 
+library_sources = [ 'src/result.c' ]
+
+if get_option('shared_library').enabled()
+
+  shared_library('result', library_sources, version: meson.project_version(), soversion: major.to_string() + '.' + minor.to_string(), include_directories: include_directories('include'))
+
+endif
+
+if get_option('static_library').enabled()
+
+  static_library('result', library_sources, include_directories: include_directories('include'))
+
+endif
+
 install_man('man/result.3')
 
 install_data(['CHANGELOG.md', 'LICENSE', 'README.md', 'ROADMAP.md'], install_dir: get_option('datadir') / 'doc')
