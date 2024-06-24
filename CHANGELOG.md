@@ -1,5 +1,6 @@
 # Unreleased (XX.XX.XXXX)
     - Changed the documentation installation directory to /usr/share/doc/result
+    - Fixed some minor conversion errors in the documentation
 
 # 0.1.2 (24.06.2024)
     - RESULT_VERSION is now defined by the result header file.

@@ -603,7 +603,7 @@ If **RESULT_DONT_DEFINE_SHORTCUTS** is not defined Result defines shortcuts for 
 >
 > DiskQuotaExceeded
 >
-> :   The user\'s quota of disk blocks was exhaused.
+> :   The user's quota of disk blocks was exhaused.
 >
 > StaleNFSFileHandle
 >
@@ -640,8 +640,7 @@ If **RESULT_DONT_DEFINE_SHORTCUTS** is not defined Result defines shortcuts for 
 >
 > NoLocksAvailable
 >
-> :   Attempted a system call that is not available on this system.\")
->     /\* Whoa
+> :   Attempted a system call that is not available on this system.
 >
 > InappropriateFileTypeOrFormat
 >
@@ -794,7 +793,7 @@ If **RESULT_DONT_DEFINE_SHORTCUTS** is not defined Result defines shortcuts for 
 >
 > IPSecProcessingFailure
 >
-> :   IPsec subsystem error.\"
+> :   IPsec subsystem error.
 >
 > NotPermittedInCapabilityMode
 >
@@ -925,11 +924,7 @@ If **RESULT_DONT_DEFINE_SHORTCUTS** is not defined Result defines shortcuts for 
 >
 > DotLibSectionCorrupted
 >
-> :   
->
-> ```{=html}
-> <!-- -->
-> ```
+> :   .lib section corrupted in a.out.
 >
 > TooManySharedLibraries
 >
