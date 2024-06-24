@@ -26,6 +26,7 @@
 #include "panic.h"
 #include "error.h"
 #include "ports/errors.h"
+#include "version.h"
 
 #define Result(type) ___RESULT_ ## type
 
