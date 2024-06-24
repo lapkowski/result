@@ -1,4 +1,6 @@
 # Unreleased (XX.XX.XXXX)
+
+# 0.1.3 (24.06.2024)
     - Changed the documentation installation directory to /usr/share/doc/result
     - Fixed some minor conversion errors in the documentation
 

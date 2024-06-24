@@ -1,9 +1,9 @@
-project('result', 'c', version: '0.1.2')
+project('result', 'c', version: '0.1.3')
 
-revision = 2
+revision = 3
 major = 0
 minor = 1
-patch = 2
+patch = 3
 
 conf_data = configuration_data()
 conf_data.set('VERSION', meson.project_version())
