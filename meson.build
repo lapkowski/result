@@ -34,15 +34,19 @@ install_headers(
 
 library_sources = [ 'src/result.c' ]
 
+pkg_config = import('pkgconfig')
+
 if get_option('shared_library').enabled()
 
-  shared_library('result', library_sources, version: meson.project_version(), soversion: major.to_string() + '.' + minor.to_string(), include_directories: include_directories('include'))
+  sh_lib = shared_library('result', library_sources, version: meson.project_version(), soversion: major.to_string() + '.' + minor.to_string(), include_directories: include_directories('include'), install: true)
+  pkg_config.generate(sh_lib)
 
 endif
 
 if get_option('static_library').enabled()
 
-  static_library('result', library_sources, include_directories: include_directories('include'))
+  st_lib = static_library('result', library_sources, include_directories: include_directories('include'), install: true)
+  pkg_config.generate(st_lib)
 
 endif
 

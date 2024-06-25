@@ -7,5 +7,6 @@
             glibc
             gcc
             ninja
+            pkg-config
         ];
     }
