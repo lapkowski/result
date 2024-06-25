@@ -32,7 +32,7 @@ install_headers(
   subdir: 'result/ports'
 )
 
-library_sources = [ 'src/result.c' ]
+library_sources = [ 'src/result.c', 'src/panic.c' ]
 
 pkg_config = import('pkgconfig')
 
