@@ -1,5 +1,8 @@
 # Unreleased (XX.XX.XXXX)
     - Prepare for the shared/static library port.
+    - Enabled shared/static library installation and generation of pkg-config files
+    - Ported panic.h to a compiled source
+    - Moved libc error definitions to the ports/libc directory
 
 # 0.1.3 (24.06.2024)
     - Changed the documentation installation directory to /usr/share/doc/result
