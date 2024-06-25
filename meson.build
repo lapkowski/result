@@ -25,11 +25,13 @@ install_headers(
 )
 
 install_headers(
-  [
-    'include/ports/errors.h',
-    'include/ports/ports.h'
-  ],
+  'include/ports/ports.h',
   subdir: 'result/ports'
+)
+
+install_headers(
+  'include/ports/libc/errors.h',
+  subdir: 'result/ports/libc'
 )
 
 library_sources = [ 'src/result.c', 'src/panic.c' ]

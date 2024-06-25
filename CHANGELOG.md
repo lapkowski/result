@@ -4,6 +4,7 @@
     - Ported panic.h to a compiled source
     - Moved libc error definitions to the ports/libc directory
     - The ROADMAP was chaned to display properly
+    - Fixed the build system to account for the libc error definition move and added the missing default panic declaration to include/panic.h
 
 # 0.1.3 (24.06.2024)
     - Changed the documentation installation directory to /usr/share/doc/result

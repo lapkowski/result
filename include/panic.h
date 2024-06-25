@@ -40,6 +40,8 @@
 
 typedef void (*___PanicFunction)(RESULT_PANIC_FUNCTION_PARAMTETERS);
 
+void ___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS);
+
 #define panicf(code, ...)                                                       \
     panic_function(__LINE__, __FILE__, __func__, code, __VA_ARGS__)
 
