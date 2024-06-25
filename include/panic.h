@@ -43,29 +43,10 @@ typedef void (*___PanicFunction)(RESULT_PANIC_FUNCTION_PARAMTETERS);
 #define panicf(code, ...)                                                       \
     panic_function(__LINE__, __FILE__, __func__, code, __VA_ARGS__)
 
-void ___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS)
-{
-    va_list arguments;
-    va_start(arguments, message);
-
-    fprintf(stderr, "The program panicked with a following message: \"");
-    vfprintf(stderr, message, arguments);
-    fprintf(stderr, 
-            "\", at %s:%d in the %s function\n\n", 
-            src_file, 
-            src_line, 
-            src_function
-        );
-
-    fprintf(stderr, "The program exited with exit code %d.\n", exit_code);
-    va_end(arguments);
-    exit(exit_code);
-}
-
 #ifndef PANIC_FUNCTION
 #define PANIC_FUNCTION ___default_panic
 #endif
 
-___PanicFunction panic_function = &PANIC_FUNCTION;
+extern ___PanicFunction panic_function;
 
 #endif
