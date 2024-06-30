@@ -28,6 +28,8 @@ typedef struct {
 
 #define ERR(id) &___ERROR_##_##id
 
+#define ERROR_DECLARE(id) extern const Error ___ERROR_##_##id;
+
 #define ERROR_DEFINE(id, _exit_code, _message)                                  \
     const Error ___ERROR_##_##id = {                                            \
         .message = _message,                                                    \

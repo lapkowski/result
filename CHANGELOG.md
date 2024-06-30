@@ -1,4 +1,6 @@
 # Unreleased (XX.XX.XXXX)
+    - Added the RESULT_DEFINE_WITH_TYPE macro to replace the RESULT_DECLARE(type) RESULT_DEFINE(type) in result types used in a single source file.
+    - Added the (RESULT/ERROR)_DECLARE macros for declaring types without compiling them with every header include.
     - Prepare for the shared/static library port.
     - Enabled shared/static library installation and generation of pkg-config files
     - Ported panic.h to a compiled source

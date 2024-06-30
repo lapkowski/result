@@ -18,14 +18,12 @@
 
 #include <result.h>
 
-/* Result(void) */
-typedef struct {
-    const Error*    error;
-    char*   	    src_file;
-    int     	    src_line;
-    const char*     src_function;
-} Result(void);
+#include <wchar.h>
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 
+/* RESULT_DEFINE(void) */
 #define ___RESULT_void_declare(error, src_line, src_file, src_function, ...)    \
     ___RESULT_void_declare_real(error, src_line, src_file, src_function)
 
@@ -176,7 +174,6 @@ bool ___RESULT_void_is_ok_and(Result(void) self, bool (*c)(void))
 }
 
 RESULT_DEFINE(char)
-typedef char* char_ptr;
 RESULT_DEFINE(char_ptr)
 RESULT_DEFINE(int8_t)
 RESULT_DEFINE(int16_t)
