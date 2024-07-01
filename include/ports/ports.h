@@ -21,16 +21,10 @@
 
 #ifndef __RESULT__UNDEF_PORTS
 
-#include "errors.h"
+#include <ports/libc/errors.h>
 #include "../error.h"
 
-const Error* ____result_bind_errno_to_error(int c_err)
-{
-    for (int i = 0; i < sizeof(___errno_binds); i++)
-        if (___errno_binds[i].c_errno == c_err) return ___errno_binds[i].error;
-
-    return ERR(UnknownError);
-}
+const Error* ____result_bind_errno_to_error(int c_err);
 
 #else
 /* UNDEFS */

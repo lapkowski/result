@@ -23,6 +23,8 @@
 
 #include <errno.h>
 
+#include <error.h>
+
 #define FileOperationFailedExitCode -1
 #define InvalidRequestExitCode -2
 #define PermissionErrorExitCode -3
