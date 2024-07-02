@@ -1,5 +1,9 @@
 # Installing Result
 
+## Compilation flags
+    - shared_library (enabled/disabled) - compile the shared library
+    - static_library (enabled/disabled) - compile the static library
+
 ## Unix-like (Linux, MacOS, \*BSD, Cygwin, ...)
 
 ### Dependencies:
