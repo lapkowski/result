@@ -8,7 +8,7 @@
 
 ## [0.2.0] - 2024-07-02
 
-_This release does not build due to missing files [`5207ef4`](https://github.com/lapkowski/result/commits/5207ef4))._
+_This release does not build due to missing files ([`5207ef4`](https://github.com/lapkowski/result/commits/5207ef4))._
 
 ### Changed
 
