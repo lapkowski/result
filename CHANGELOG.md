@@ -1,6 +1,14 @@
 # Changelog
 
+## [0.2.1] - 2024-07-03
+
+### Fixed
+
+- Add untracked files (`src/ports/*`) to the repository ([`5207ef4`](https://github.com/lapkowski/result/commits/5207ef4)) ([**@lapkowski**](https://github.com/lapkowski))
+
 ## [0.2.0] - 2024-07-02
+
+_This release does not build due to missing files [`5207ef4`](https://github.com/lapkowski/result/commits/5207ef4))._
 
 ### Changed
 
@@ -50,6 +58,7 @@
 
 _Initial Release_
 
+[0.2.1]: https://github.com/lapkowski/result/releases/tag/v0.2.1
 [0.2.0]: https://github.com/lapkowski/result/releases/tag/v0.2.0
 [0.1.3]: https://github.com/lapkowski/result/releases/tag/v0.1.3
 [0.1.2]: https://github.com/lapkowski/result/releases/tag/v0.1.2
