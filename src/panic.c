@@ -18,7 +18,10 @@
 
 #include <panic.h>
 
+#include <stdbool.h>
+
 ___PanicFunction panic_function = &PANIC_FUNCTION;
+bool panic_exit_on_panic = true;
 
 void ___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS)
 {
@@ -34,7 +37,7 @@ void ___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS)
             src_function
         );
 
-    fprintf(stderr, "The program exited with exit code %d.\n", exit_code);
+    fprintf(stderr, "The program %s with exit code %d.\n", panic_exit_on_panic ? "exited" : "\"exited\"", exit_code);
     va_end(arguments);
-    exit(exit_code);
+    if (panic_exit_on_panic) exit(exit_code);
 }

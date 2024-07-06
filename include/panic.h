@@ -22,6 +22,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <stdbool.h>
 
 #define RESULT_PANIC_FUNCTION_PARAMTETERS                                       \
     int src_line,                                                               \
@@ -50,5 +51,6 @@ void ___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS);
 #endif
 
 extern ___PanicFunction panic_function;
+extern bool panic_exit_on_panic;
 
 #endif

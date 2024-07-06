@@ -45,9 +45,9 @@ if get_option('shared_library').enabled()
 
 endif
 
-if get_option('static_library').enabled()
+if get_option('static_library').enabled() or get_option('tests').enabled()
 
-  st_lib = static_library('result', library_sources, include_directories: include_directories('include'), install: true)
+  st_lib = static_library('result', library_sources, include_directories: include_directories('include'), install: get_option('static_library').enabled())
   pkg_config.generate(st_lib)
 
 endif
@@ -56,3 +56,19 @@ install_man('man/result.3')
 
 install_data(['CHANGELOG.md', 'LICENSE', 'README.md', 'ROADMAP.md'], install_dir: get_option('datadir') / 'doc')
 install_data('docs/docs.md', install_dir: get_option('datadir') / 'doc/result')
+
+if get_option('tests').enabled()
+
+  tests = [
+    # TEST_ID,      TEST_OBJECTS,         TEST_EXEC_OUTPUT, TEST_SHOULD_FAIL
+    ['sample_test', 'test/sample_test.c', 'sample_tests', false],
+    ['sample_test2', 'test/sample_test.c', 'sample_tests', false],
+    ['panic_api_abuse', 'test/panic/api_abuse.c', 'panic', true]
+  ]
+
+  foreach t :tests 
+    exe = executable(t[0], t[1], include_directories: include_directories('include'), link_with: st_lib)
+    test(t[0], exe, suite: t[2], should_fail: t[3])
+  endforeach
+
+endif

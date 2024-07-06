@@ -1,2 +1,3 @@
 option('shared_library', type: 'feature', value: 'enabled')
 option('static_library', type: 'feature', value: 'disabled')
+option('tests', type: 'feature', value: 'disabled')
