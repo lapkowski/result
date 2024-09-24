@@ -24,14 +24,16 @@
 typedef struct {
     char* message;
     int exit_code;
-} Error;
+} ErrorType;
 
-#define ERR(id) &___ERROR_##_##id
+typedef ErrorType Error;
 
-#define ERROR_DECLARE(id) extern const Error ___ERROR_##_##id;
+#define ERRTYPE(id) &___ERRORTYPE_##_##id
 
-#define ERROR_DEFINE(id, _exit_code, _message)                                  \
-    const Error ___ERROR_##_##id = {                                            \
+#define ERRORTYPE_DECLARE(id) extern const Error ___ERROR_##_##id;
+
+#define ERRORTYPE_DEFINE(id, _exit_code, _message)                              \
+    const ErrorType ___ERRORTYPE_##_##id = {                                    \
         .message = _message,                                                    \
         .exit_code = _exit_code                                                 \
     };                                                                          \
