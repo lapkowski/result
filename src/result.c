@@ -27,7 +27,7 @@
 #define ___RESULT_void_declare(error, src_line, src_file, src_function, ...)    \
     ___RESULT_void_declare_real(error, src_line, src_file, src_function)
 
-Result(void) ___RESULT_void_declare_real(const Error* error,
+Result(void) ___RESULT_void_declare_real(const ErrorType* error,
                                          int src_line, char* src_file,
                                          const char* src_function)
 {
@@ -81,7 +81,7 @@ void ___RESULT_void_expect(int src_line, char* src_file,
             );
 }
 
-const Error* ___RESULT_void_expect_err(int src_line, char* src_file,
+const ErrorType* ___RESULT_void_expect_err(int src_line, char* src_file,
                                        const char* src_function,
                                        Result(void) self,
                                        const char* error)
@@ -98,7 +98,7 @@ const Error* ___RESULT_void_expect_err(int src_line, char* src_file,
     return self.error;
 }
 
-const Error* ___RESULT_void_unwrap_err(int src_line, char* src_file,
+const ErrorType* ___RESULT_void_unwrap_err(int src_line, char* src_file,
                                        const char* src_function,
                                        Result(void) self)
 {
@@ -135,8 +135,8 @@ Result(void) ___RESULT_void_or(Result(void) self, Result(void) other)
     return self;
 }
 
-const Error* ___RESULT_void_unwrap_err_or(Result(void) self,
-                                          const Error* fallback)
+const ErrorType* ___RESULT_void_unwrap_err_or(Result(void) self,
+                                          const ErrorType* fallback)
 {
     if (is_ok(self)) return fallback;
 
@@ -144,7 +144,7 @@ const Error* ___RESULT_void_unwrap_err_or(Result(void) self,
 }
 
 Result(void) ___RESULT_void_or_else(Result(void) self,
-                                    Result(void) (*c)(const Error*))
+                                    Result(void) (*c)(const ErrorType*))
 {
     if (is_err(self)) return (*c)(self.error);
 
@@ -157,13 +157,13 @@ void ___RESULT_void_inspect(Result(void) self, void (*c)(void))
         (*c)();
 }
 
-void ___RESULT_void_inspect_err(Result(void) self, void (*c)(const Error*))
+void ___RESULT_void_inspect_err(Result(void) self, void (*c)(const ErrorType*))
 {
     if (is_err(self))
         (*c)(self.error);
 }
 
-bool ___RESULT_void_is_err_and(Result(void) self, bool (*c)(const Error*))
+bool ___RESULT_void_is_err_and(Result(void) self, bool (*c)(const ErrorType*))
 {
     return is_err(self) && (*c)(self.error);
 }

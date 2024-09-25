@@ -26,11 +26,38 @@ typedef struct {
     int exit_code;
 } ErrorType;
 
-typedef ErrorType Error;
+struct Error {
+    const ErrorType* type;
+    char*            custom_message;
+    char*            src_file;
+    int              src_line;
+    const char*      src_function;
+    struct Error*    source;
+    void*            backtrace;
+    int              backtrace_size;
+    char**           backtrace_symbols;
+};
+
+typedef struct Error Error;
+
+Error* __Error_construct(const ErrorType* type, char* custom_message, Error* source, char* src_file, int src_line, const char* src_function);
+
+#define ___ERROR_ARG(_1, _2, _3, _4, ...) _4
+#define ___ERROR_COUNT_COMMAS(...) ___ERROR_ARG(__VA_ARGS__, 2, 1, 0, 0)
+
+#define ___ERROR_CONSTRUCT_EXPAND(x) ___ERROR_CONSTRUCT ## x
+#define ___ERROR_CONSTRUCT_HELPER(x) ___ERROR_CONSTRUCT_EXPAND(x)
+#define Error_construct(...) ___ERROR_CONSTRUCT_HELPER(___ERROR_COUNT_COMMAS(__VA_ARGS__)(__VA_ARGS__))
+
+#define ___ERROR_CONSTRUCT0(type) ___Error_construct(type, NULL, NULL, __FILE__, __LINE__, __func__)
+#define ___ERROR_CONSTRUCT1(type, ...) ___Error_construct(type, __VA_ARGS__, NULL, __FILE__, __LINE__, __func__)
+#define ___ERROR_CONSTRUCT2(type, ...) ___Error_construct(type, __VA_ARGS__, __FILE__, __LINE__, __func__)
+
+void Error_free(Error* error);
 
 #define ERRTYPE(id) &___ERRORTYPE_##_##id
 
-#define ERRORTYPE_DECLARE(id) extern const Error ___ERROR_##_##id;
+#define ERRORTYPE_DECLARE(id) extern const ErrorType ___ERRORTYPE_##_##id;
 
 #define ERRORTYPE_DEFINE(id, _exit_code, _message)                              \
     const ErrorType ___ERRORTYPE_##_##id = {                                    \

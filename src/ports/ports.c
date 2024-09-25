@@ -19,10 +19,10 @@
 #include <ports/ports.h>
 #include <ports/libc/errors.h>
 
-const Error* ____result_bind_errno_to_error(int c_err)
+const ErrorType* ____result_bind_errno_to_error(int c_err)
 {
     for (int i= 0; i < ___errno_binds_size; i++)
         if (___errno_binds[i].c_errno == c_err) return ___errno_binds[i].error;
 
-    return ERR(UnknownError);
+    return ERRTYPE(UnknownError);
 }

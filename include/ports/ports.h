@@ -24,7 +24,7 @@
 #include <ports/libc/errors.h>
 #include "../error.h"
 
-const Error* ____result_bind_errno_to_error(int c_err);
+const ErrorType* ____result_bind_errno_to_error(int c_err);
 
 #else
 /* UNDEFS */

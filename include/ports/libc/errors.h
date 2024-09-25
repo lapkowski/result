@@ -197,7 +197,7 @@ ERRORTYPE_DECLARE(UnknownError)
 
 typedef struct {
     int c_errno;
-    const Error* error;
+    const ErrorType* error;
 } ___ERRNO_BIND;
 
 extern const int ___errno_binds_size;

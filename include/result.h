@@ -35,7 +35,7 @@
 #define RESULT_DEFINE_WITH_TYPE(type)                                           \
     typedef struct {                                                            \
         type            value;                                                  \
-        const Error*    error;                                                  \
+        const ErrorType*    error;                                                  \
         char*           src_file;                                               \
         int             src_line;                                               \
         const char*     src_function;                                           \
@@ -46,13 +46,13 @@
 #define RESULT_DECLARE(type)                                                    \
     typedef struct {                                                            \
         type    	    value;                                                  \
-        const Error*    error;                                                  \
+        const ErrorType*    error;                                                  \
         char*   	    src_file;                                               \
         int     	    src_line;                                               \
         const char*     src_function;                                           \
     } Result(type);                                                             \
                                                                                 \
-    Result(type) ___RESULT_## type ##_declare(const Error* error, int src_line, \
+    Result(type) ___RESULT_## type ##_declare(const ErrorType* error, int src_line, \
                                               char* src_file,                   \
                                               const char* src_function,         \
                                               type value);                      \
@@ -63,19 +63,19 @@
                                                                                 \
     type ___RESULT_## type ##_unwrap_or(Result(type) self, type fallback);      \
                                                                                 \
-    const Error* ___RESULT_## type ##_unwrap_err_or(Result(type) self,          \
-                                                    const Error* fallback);     \
+    const ErrorType* ___RESULT_## type ##_unwrap_err_or(Result(type) self,          \
+                                                    const ErrorType* fallback);     \
                                                                                 \
     type ___RESULT_## type ##_expect(int src_line, char* src_file,              \
                                      const char* src_function,                  \
                                      Result(type) self, const char* error);     \
                                                                                 \
-    const Error* ___RESULT_## type ##_expect_err(int src_line, char* src_file,  \
+    const ErrorType* ___RESULT_## type ##_expect_err(int src_line, char* src_file,  \
                                                  const char* src_function,      \
                                                  Result(type) self,             \
                                                  const char* error);            \
                                                                                 \
-    const Error* ___RESULT_## type ##_unwrap_err(int src_line, char* src_file,  \
+    const ErrorType* ___RESULT_## type ##_unwrap_err(int src_line, char* src_file,  \
                                                  const char* src_function,      \
                                                  Result(type) self);            \
                                                                                 \
@@ -88,25 +88,25 @@
     Result(type) ___RESULT_## type ##_or(Result(type) self,                     \
                                          Result(type) other);                   \
                                                                                 \
-    const Error* ___RESULT_## type ##_unwrap_err_or(Result(type) self,          \
-                                                    const Error* fallback);     \
+    const ErrorType* ___RESULT_## type ##_unwrap_err_or(Result(type) self,          \
+                                                    const ErrorType* fallback);     \
                                                                                 \
     Result(type) ___RESULT_## type ##_or_else(Result(type) self,                \
-                                              Result(type) (*c)(const Error*)); \
+                                              Result(type) (*c)(const ErrorType*)); \
                                                                                 \
     void ___RESULT_## type ##_inspect(Result(type) self, void (*c)(type));      \
                                                                                 \
     void ___RESULT_## type ##_inspect_err(Result(type) self,                    \
-                                          void (*c)(const Error*));             \
+                                          void (*c)(const ErrorType*));             \
                                                                                 \
     bool ___RESULT_## type ##_is_err_and(Result(type) self,                     \
-                                         bool (*c)(const Error*));              \
+                                         bool (*c)(const ErrorType*));              \
                                                                                 \
     bool ___RESULT_## type ##_is_ok_and(Result(type) self, bool (*c)(type));    \
 
 
 #define RESULT_DEFINE(type)                                                     \
-    Result(type) ___RESULT_## type ##_declare(const Error* error, int src_line, \
+    Result(type) ___RESULT_## type ##_declare(const ErrorType* error, int src_line, \
                                               char* src_file,                   \
                                               const char* src_function,         \
                                               type value)                       \
@@ -149,8 +149,8 @@
         return self.value;                                                      \
     }                                                                           \
                                                                                 \
-    const Error* ___RESULT_## type ##_unwrap_err_or(Result(type) self,          \
-                                                    const Error* fallback)      \
+    const ErrorType* ___RESULT_## type ##_unwrap_err_or(Result(type) self,          \
+                                                    const ErrorType* fallback)      \
     {                                                                           \
         if (is_ok(self)) return fallback;                                       \
                                                                                 \
@@ -177,7 +177,7 @@
         return self.value;                                                    	\
     }                                                                           \
                                                                                 \
-    const Error* ___RESULT_## type ##_expect_err(int src_line, char* src_file,  \
+    const ErrorType* ___RESULT_## type ##_expect_err(int src_line, char* src_file,  \
                                                  const char* src_function,      \
                                                  Result(type) self,             \
                                                  const char* error)	            \
@@ -194,7 +194,7 @@
         return self.error;                                                    	\
     }                                                                           \
                                                                                 \
-    const Error* ___RESULT_## type ##_unwrap_err(int src_line, char* src_file,  \
+    const ErrorType* ___RESULT_## type ##_unwrap_err(int src_line, char* src_file,  \
                                                  const char* src_function,      \
                                                  Result(type) self)             \
     {                                                                           \
@@ -233,7 +233,7 @@
     }                                                                           \
                                                                                 \
     Result(type) ___RESULT_## type ##_or_else(Result(type) self,                \
-                                              Result(type) (*c)(const Error*))  \
+                                              Result(type) (*c)(const ErrorType*))  \
     {                                                                           \
         if (is_err(self)) return (*c)(self.error);                              \
                                                                                 \
@@ -247,14 +247,14 @@
     }                                                                           \
                                                                                 \
     void ___RESULT_## type ##_inspect_err(Result(type) self,                    \
-                                          void (*c)(const Error*))              \
+                                          void (*c)(const ErrorType*))              \
     {                                                                           \
         if (is_err(self))                                                       \
             (*c)(self.error);                                                   \
     }                                                                           \
                                                                                 \
     bool ___RESULT_## type ##_is_err_and(Result(type) self,                     \
-                                         bool (*c)(const Error*))               \
+                                         bool (*c)(const ErrorType*))               \
     {                                                                           \
         return is_err(self) && (*c)(self.error);                                \
     }                                                                           \
@@ -386,13 +386,13 @@ RESULT_DECLARE(wchar_t)
 
 /* RESULT_DECLARE(void) */
 typedef struct {
-        const Error*    error;
+        const ErrorType*    error;
         char*           src_file;
         int             src_line;
         const char*     src_function;
 } ___RESULT_void;
 
-Result(void) ___RESULT_void_declare_real(const Error* error,
+Result(void) ___RESULT_void_declare_real(const ErrorType* error,
                                          int src_line, char* src_file,
                                          const char* src_function);
 
@@ -405,12 +405,12 @@ void ___RESULT_void_expect(int src_line, char* src_file,
                            const char* src_function, Result(void) self,
                            const char* error);
 
-const Error* ___RESULT_void_expect_err(int src_line, char* src_file,
+const ErrorType* ___RESULT_void_expect_err(int src_line, char* src_file,
                                        const char* src_function,
                                        Result(void) self,
                                        const char* error);
 
-const Error* ___RESULT_void_unwrap_err(int src_line, char* src_file,
+const ErrorType* ___RESULT_void_unwrap_err(int src_line, char* src_file,
                                        const char* src_function,
                                        Result(void) self);
 
@@ -421,17 +421,17 @@ Result(void) ___RESULT_void_and_then(Result(void) self,
 
 Result(void) ___RESULT_void_or(Result(void) self, Result(void) other);
 
-const Error* ___RESULT_void_unwrap_err_or(Result(void) self,
-                                          const Error* fallback);
+const ErrorType* ___RESULT_void_unwrap_err_or(Result(void) self,
+                                          const ErrorType* fallback);
 
 Result(void) ___RESULT_void_or_else(Result(void) self,
-                                    Result(void) (*c)(const Error*));
+                                    Result(void) (*c)(const ErrorType*));
 
 void ___RESULT_void_inspect(Result(void) self, void (*c)(void));
 
-void ___RESULT_void_inspect_err(Result(void) self, void (*c)(const Error*));
+void ___RESULT_void_inspect_err(Result(void) self, void (*c)(const ErrorType*));
 
-bool ___RESULT_void_is_err_and(Result(void) self, bool (*c)(const Error*));
+bool ___RESULT_void_is_err_and(Result(void) self, bool (*c)(const ErrorType*));
 
 bool ___RESULT_void_is_ok_and(Result(void) self, bool (*c)(void));
 
