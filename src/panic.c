@@ -23,21 +23,25 @@
 ___PanicFunction panic_function = &PANIC_FUNCTION;
 bool panic_exit_on_panic = true;
 
-void ___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS)
+void
+___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS)
 {
-    va_list arguments;
-    va_start(arguments, message);
+  va_list arguments;
+  va_start(arguments, message);
 
-    fprintf(stderr, "The program panicked with a following message: \"");
-    vfprintf(stderr, message, arguments);
-    fprintf(stderr, 
-            "\", at %s:%d in the %s function\n\n", 
-            src_file, 
-            src_line, 
-            src_function
-        );
+  fprintf(stderr, "The program panicked with a following message: \"");
+  vfprintf(stderr, message, arguments);
+  fprintf(stderr,
+          "\", at %s:%d in the %s function\n\n",
+          src_file,
+          src_line,
+          src_function);
 
-    fprintf(stderr, "The program %s with exit code %d.\n", panic_exit_on_panic ? "exited" : "\"exited\"", exit_code);
-    va_end(arguments);
-    if (panic_exit_on_panic) exit(exit_code);
+  fprintf(stderr,
+          "The program %s with exit code %d.\n",
+          panic_exit_on_panic ? "exited" : "\"exited\"",
+          exit_code);
+  va_end(arguments);
+  if (panic_exit_on_panic)
+    exit(exit_code);
 }

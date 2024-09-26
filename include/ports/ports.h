@@ -1,5 +1,6 @@
 /*
-    PORTS/PORTS.H - Common functions and macros for porting functions to result based error handling.
+    PORTS/PORTS.H - Common functions and macros for porting functions to result
+   based error handling.
 
     Copyright (C) 2024 Mariusz Łapkowski
 
@@ -21,10 +22,11 @@
 
 #ifndef __RESULT__UNDEF_PORTS
 
-#include <ports/libc/errors.h>
 #include "../error.h"
+#include <ports/libc/errors.h>
 
-const ErrorType* ____result_bind_errno_to_error(int c_err);
+const ErrorType*
+____result_bind_errno_to_error(int c_err);
 
 #else
 /* UNDEFS */

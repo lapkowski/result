@@ -12,4 +12,9 @@ Thanks for sharing interest in developing Result!
 Refer to the **INSTALL.md** file at the root of the repository.
 
 ## Coding style
-TODO
+This project uses the [Mozilla C++ Coding style](https://firefox-source-docs.mozilla.org/code-quality/coding-style/index.html).
+Before commiting to the repository please run clang-format to format all changes to the codebase:
+```
+find -name '*.[ch]' -exec clang-format -i --style=Mozilla {} \;
+```
+(Aliased to ```format-code``` in the Nix shell)

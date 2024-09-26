@@ -1,5 +1,6 @@
 /*
-    PORTS/ERRORTYPES.H - Error defines for the errno constants on diffrent targets
+    PORTS/ERRORTYPES.H - Error defines for the errno constants on diffrent
+   targets
 
     Copyright (C) 2024 Mariusz Łapkowski
 
@@ -195,9 +196,10 @@ ERRORTYPE_DECLARE(MemoryPageHasHardwareError)
 ERRORTYPE_DECLARE(Async)
 ERRORTYPE_DECLARE(UnknownError)
 
-typedef struct {
-    int c_errno;
-    const ErrorType* error;
+typedef struct
+{
+  int c_errno;
+  const ErrorType* error;
 } ___ERRNO_BIND;
 
 extern const int ___errno_binds_size;

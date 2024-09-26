@@ -18,159 +18,170 @@
 
 #include <result.h>
 
-#include <wchar.h>
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdint.h>
+#include <wchar.h>
 
 /* RESULT_DEFINE(void) */
-#define ___RESULT_void_declare(error, src_line, src_file, src_function, ...)    \
-    ___RESULT_void_declare_real(error, src_line, src_file, src_function)
+#define ___RESULT_void_declare(error, src_line, src_file, src_function, ...)   \
+  ___RESULT_void_declare_real(error, src_line, src_file, src_function)
 
 Result(void) ___RESULT_void_declare_real(const ErrorType* error,
-                                         int src_line, char* src_file,
+                                         int src_line,
+                                         char* src_file,
                                          const char* src_function)
 {
-    Result(void) result = {
-        .error = error,
-        .src_file = src_file,
-        .src_line = src_line,
-        .src_function = src_function,
-    };
+  Result(void) result = {
+    .error = error,
+    .src_file = src_file,
+    .src_line = src_line,
+    .src_function = src_function,
+  };
 
-    return result;
+  return result;
 }
 
-void ___RESULT_void_unwrap(int src_line, char* src_file,
-                           const char* src_function, Result(void) self)
+void
+___RESULT_void_unwrap(int src_line,
+                      char* src_file,
+                      const char* src_function,
+                      Result(void) self)
 {
-    if (is_err(self))
-        panic_function(src_line,
-                       src_file,
-                       src_function,
-                       self.error->exit_code,
-                       "Tried to unwrap from an error result."
-                       "\n\tError: %s (from %s at %s:%d)",
-                       self.error->message,
-                       self.src_function,
-                       self.src_file,
-                       self.src_line
-            );
+  if (is_err(self))
+    panic_function(src_line,
+                   src_file,
+                   src_function,
+                   self.error->exit_code,
+                   "Tried to unwrap from an error result."
+                   "\n\tError: %s (from %s at %s:%d)",
+                   self.error->message,
+                   self.src_function,
+                   self.src_file,
+                   self.src_line);
 }
 
-void ___RESULT_void_unwrap_or(Result(void) result)
+void
+___RESULT_void_unwrap_or(Result(void) result)
 {
-    (void)(result);
+  (void)(result);
 }
 
-void ___RESULT_void_expect(int src_line, char* src_file,
-                           const char* src_function, Result(void) self,
-                           const char* error)
+void
+___RESULT_void_expect(int src_line,
+                      char* src_file,
+                      const char* src_function,
+                      Result(void) self,
+                      const char* error)
 {
-    if (is_err(self))
-        panic_function(src_line,
-                       src_file,
-                       src_function,
-                       6,
-                       "%s: %s (from %s at %s:%d)",
-                       error,
-                       self.error->message,
-                       self.src_function,
-                       self.src_file,
-                       self.src_line
-            );
+  if (is_err(self))
+    panic_function(src_line,
+                   src_file,
+                   src_function,
+                   6,
+                   "%s: %s (from %s at %s:%d)",
+                   error,
+                   self.error->message,
+                   self.src_function,
+                   self.src_file,
+                   self.src_line);
 }
 
-const ErrorType* ___RESULT_void_expect_err(int src_line, char* src_file,
-                                       const char* src_function,
-                                       Result(void) self,
-                                       const char* error)
+const ErrorType*
+___RESULT_void_expect_err(int src_line,
+                          char* src_file,
+                          const char* src_function,
+                          Result(void) self,
+                          const char* error)
 {
-    if (is_ok(self))
-        panic_function(src_line,
-                       src_file,
-                       src_function,
-                       6,
-                       "%s",
-                       error
-            );
+  if (is_ok(self))
+    panic_function(src_line, src_file, src_function, 6, "%s", error);
 
-    return self.error;
+  return self.error;
 }
 
-const ErrorType* ___RESULT_void_unwrap_err(int src_line, char* src_file,
-                                       const char* src_function,
-                                       Result(void) self)
+const ErrorType*
+___RESULT_void_unwrap_err(int src_line,
+                          char* src_file,
+                          const char* src_function,
+                          Result(void) self)
 {
-    if (is_ok(self))
-        panic_function(src_line,
-                       src_file,
-                       src_function,
-                       6,
-                       "Tried to unwrap an error from an ok result."
-            );
+  if (is_ok(self))
+    panic_function(src_line,
+                   src_file,
+                   src_function,
+                   6,
+                   "Tried to unwrap an error from an ok result.");
 
-    return self.error;
+  return self.error;
 }
 
 Result(void) ___RESULT_void_and(Result(void) self, Result(void) other)
 {
-    if (is_ok(self)) return other;
+  if (is_ok(self))
+    return other;
 
-    return self;
+  return self;
 }
 
-Result(void) ___RESULT_void_and_then(Result(void) self,
-                                     Result(void) (*c)(void))
+Result(void) ___RESULT_void_and_then(Result(void) self, Result(void) (*c)(void))
 {
-    if (is_ok(self)) return (*c)();
+  if (is_ok(self))
+    return (*c)();
 
-    return self;
+  return self;
 }
 
 Result(void) ___RESULT_void_or(Result(void) self, Result(void) other)
 {
-    if (is_err(self)) return other;
+  if (is_err(self))
+    return other;
 
-    return self;
+  return self;
 }
 
-const ErrorType* ___RESULT_void_unwrap_err_or(Result(void) self,
-                                          const ErrorType* fallback)
+const ErrorType*
+___RESULT_void_unwrap_err_or(Result(void) self, const ErrorType* fallback)
 {
-    if (is_ok(self)) return fallback;
+  if (is_ok(self))
+    return fallback;
 
-    return self.error;
+  return self.error;
 }
 
-Result(void) ___RESULT_void_or_else(Result(void) self,
-                                    Result(void) (*c)(const ErrorType*))
+Result(void)
+  ___RESULT_void_or_else(Result(void) self, Result(void) (*c)(const ErrorType*))
 {
-    if (is_err(self)) return (*c)(self.error);
+  if (is_err(self))
+    return (*c)(self.error);
 
-    return self;
+  return self;
 }
 
-void ___RESULT_void_inspect(Result(void) self, void (*c)(void))
+void
+___RESULT_void_inspect(Result(void) self, void (*c)(void))
 {
-    if (is_ok(self))
-        (*c)();
+  if (is_ok(self))
+    (*c)();
 }
 
-void ___RESULT_void_inspect_err(Result(void) self, void (*c)(const ErrorType*))
+void
+___RESULT_void_inspect_err(Result(void) self, void (*c)(const ErrorType*))
 {
-    if (is_err(self))
-        (*c)(self.error);
+  if (is_err(self))
+    (*c)(self.error);
 }
 
-bool ___RESULT_void_is_err_and(Result(void) self, bool (*c)(const ErrorType*))
+bool
+___RESULT_void_is_err_and(Result(void) self, bool (*c)(const ErrorType*))
 {
-    return is_err(self) && (*c)(self.error);
+  return is_err(self) && (*c)(self.error);
 }
 
-bool ___RESULT_void_is_ok_and(Result(void) self, bool (*c)(void))
+bool
+___RESULT_void_is_ok_and(Result(void) self, bool (*c)(void))
 {
-    return is_ok(self) && (*c)();
+  return is_ok(self) && (*c)();
 }
 
 RESULT_DEFINE(char)

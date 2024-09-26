@@ -1,5 +1,6 @@
 /*
-    PORTS/PORTS.C - Common functions for porting functions to result based error handling.
+    PORTS/PORTS.C - Common functions for porting functions to result based error
+   handling.
 
     Copyright (C) 2024 Mariusz Łapkowski
 
@@ -16,13 +17,15 @@
     limitations under the License.
 */
 
-#include <ports/ports.h>
 #include <ports/libc/errors.h>
+#include <ports/ports.h>
 
-const ErrorType* ____result_bind_errno_to_error(int c_err)
+const ErrorType*
+____result_bind_errno_to_error(int c_err)
 {
-    for (int i= 0; i < ___errno_binds_size; i++)
-        if (___errno_binds[i].c_errno == c_err) return ___errno_binds[i].error;
+  for (int i = 0; i < ___errno_binds_size; i++)
+    if (___errno_binds[i].c_errno == c_err)
+      return ___errno_binds[i].error;
 
-    return ERRTYPE(UnknownError);
+  return ERRTYPE(UnknownError);
 }

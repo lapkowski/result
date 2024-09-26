@@ -19,32 +19,28 @@
 #ifndef ___RESULT__PANIC___
 #define ___RESULT__PANIC___
 
-#include <stdio.h>
-#include <stdlib.h>
 #include <stdarg.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-#define RESULT_PANIC_FUNCTION_PARAMTETERS                                       \
-    int src_line,                                                               \
-    const char* src_file,                                                       \
-    const char* src_function,                                                   \
-    int exit_code,                                                              \
-    void* message,                                                              \
-    ...
+#define RESULT_PANIC_FUNCTION_PARAMTETERS                                      \
+  int src_line, const char *src_file, const char *src_function, int exit_code, \
+    void *message, ...
 
-#define FIX_RESULT_UNUSED                                                       \
-    (void) src_file;                                                            \
-    (void) src_line;                                                            \
-    (void) src_function;                                                        \
-    (void) exit_code;                                                           \
-    (void) message;
+#define FIX_RESULT_UNUSED                                                      \
+  (void)src_file;                                                              \
+  (void)src_line;                                                              \
+  (void)src_function;                                                          \
+  (void)exit_code;                                                             \
+  (void)message;
 
 typedef void (*___PanicFunction)(RESULT_PANIC_FUNCTION_PARAMTETERS);
 
 void ___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS);
 
-#define panicf(code, ...)                                                       \
-    panic_function(__LINE__, __FILE__, __func__, code, __VA_ARGS__)
+#define panicf(code, ...)                                                      \
+  panic_function(__LINE__, __FILE__, __func__, code, __VA_ARGS__)
 
 #ifndef PANIC_FUNCTION
 #define PANIC_FUNCTION ___default_panic
