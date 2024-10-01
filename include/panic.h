@@ -35,18 +35,14 @@
   (void)exit_code;                                                             \
   (void)message;
 
-typedef void (*___PanicFunction)(RESULT_PANIC_FUNCTION_PARAMTETERS);
+typedef void (*PanicFunction)(RESULT_PANIC_FUNCTION_PARAMTETERS);
 
 void ___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS);
 
 #define panicf(code, ...)                                                      \
   panic_function(__LINE__, __FILE__, __func__, code, __VA_ARGS__)
 
-#ifndef PANIC_FUNCTION
-#define PANIC_FUNCTION ___default_panic
-#endif
-
-extern ___PanicFunction panic_function;
+extern PanicFunction panic_function;
 extern bool panic_exit_on_panic;
 
 #endif
