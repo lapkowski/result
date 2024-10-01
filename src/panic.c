@@ -20,8 +20,14 @@
 
 #include <stdbool.h>
 
-___PanicFunction panic_function = &PANIC_FUNCTION;
+PanicFunction panic_function = &PANIC_FUNCTION;
 bool panic_exit_on_panic = true;
+
+void panic_set_panic_function(PanicFunction new)
+{
+    if (new == NULL) panic("Api abuse on panic_set_panic_function (new == NULL).");
+    panic_function = new;
+}
 
 void ___default_panic(RESULT_PANIC_FUNCTION_PARAMTETERS)
 {
