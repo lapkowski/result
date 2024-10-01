@@ -2,7 +2,7 @@
     pkgs.mkShell {
         shellHook = ''
             format-code() {
-                find -name '*.[ch]' -exec clang-format -i --style=Mozilla {} \;
+                find -name '*.[ch]' -exec clang-format -i {} \;
             }
         '';
         nativeBuildInputs = with pkgs.buildPackages; [
